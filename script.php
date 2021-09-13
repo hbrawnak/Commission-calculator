@@ -1,6 +1,6 @@
 <?php
 
-use Paysera\CommissionTask\Service\Calculator;
+use Paysera\CommissionTask\Calculator;
 
 require 'vendor/autoload.php';
 
