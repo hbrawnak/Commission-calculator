@@ -6,7 +6,7 @@ namespace Paysera\CommissionTask;
 
 use Paysera\CommissionTask\Service\Charge\ChargeableInterface;
 
-class Model
+class Transaction implements TransactionInterface
 {
     const TYPE_PRIVATE  = 'private';
     const TYPE_BUSINESS = 'business';
