@@ -9,10 +9,10 @@ use Paysera\CommissionTask\TransactionInterface;
 
 class Commission
 {
-    const TYPE_PRIVATE = 'private';
+    const TYPE_PRIVATE  = 'private';
     const TYPE_BUSINESS = 'business';
 
-    const OP_DEPOSIT = 'deposit';
+    const OP_DEPOSIT  = 'deposit';
     const OP_WITHDRAW = 'withdraw';
 
     private $transaction;
@@ -51,8 +51,13 @@ class Commission
         }
 
         if ($this->transaction->getType() == self::TYPE_BUSINESS) {
-            return Helper::getPercentage(0.5, $this->transaction->getAmount());
+            return $this->businessAccountCommission();
         }
+    }
+
+    private function businessAccountCommission()
+    {
+        return Helper::getPercentage(0.5, $this->transaction->getAmount());
     }
 
 
@@ -67,36 +72,72 @@ class Commission
     {
 
         /* First 1000 is free, so set user and date on session */
+        //$this->currencyExchange($this->transaction->getAmount());
         $user = Cache::get($this->transaction->getId());
         if ($user) {
             $lastDate = $user['date'];
-           if (Helper::getDayDiff($this->transaction->getDate(), $lastDate) > 7) {
-               $data = ['date' => $this->transaction->getDate(), 'count' => 1];
-               Cache::set($this->transaction->getId(), $data);
+            /* If last date is bigger than 7 */
+            if (Helper::getDayDiff($this->transaction->getDate(), $lastDate) > 7) {
 
-               return Helper::getPercentage(0.3, $this->transaction->getAmount());
-           } else {
-               $data = ['date' => $this->transaction->getDate(), 'count' => $user['user']['count'] + 1];
-               Cache::set($this->transaction->getId(), $data);
+                $data = [
+                    'date' => $this->transaction->getDate(),
+                    'withdrawCount' => 1,
+                    'amount' => $this->transaction->getAmount()
+                ];
+                Cache::set($this->transaction->getId(), $data);
 
+                return Helper::getPercentage(0.3, $this->transaction->getAmount());
 
-           }
+            } elseif (Helper::getDayDiff($this->transaction->getDate(), $lastDate) >= 7
+                && $user['withdrawCount'] < 3) {
+                /* If last date is smaller than 7 and withdraw less than 3 */
+                $chargeAbleAmount = 0;
+                if ($user['amount'] > $this->freeWeekLimit()) {
+                    $chargeAbleAmount = $this->transaction->getAmount();
+                } else {
+                    $chargeAbleAmount = $this->freeWeekLimit() - $user['amount'];
+                }
+
+                $data = [
+                    'date' => $this->transaction->getDate(),
+                    'withdrawCount' => $user['withdrawCount'] + 1,
+                    'amount' => $user['amount'] + $chargeAbleAmount
+                ];
+                Cache::set($this->transaction->getId(), $data);
+                return Helper::getPercentage(0.3, $chargeAbleAmount);
+            }
         } else {
             if ($this->transaction->getAmount() > $this->freeWeekLimit()) {
                 $chargeAbleAmount = $this->transaction->getAmount() - $this->freeWeekLimit();
 
-                $data =  ['date' => $this->transaction->getDate(), 'count' => 1];
+                $data = [
+                    'date' => $this->transaction->getDate(),
+                    'withdrawCount' => 1,
+                    'amount' => $this->transaction->getAmount()
+                ];
                 Cache::set($this->transaction->getId(), $data);
 
                 return Helper::getPercentage(0.3, $chargeAbleAmount);
             }
         }
 
-
-
         return Helper::getPercentage(0.3, $this->transaction->getAmount());
     }
 
+
+    private function currencyExchange($amount)
+    {
+        //TODO Fix the API issue ASAP
+
+        if ($this->transaction->getCurrency() !== 'EUR') {
+            print_r($this->transaction->getCurrency());
+            $conversion = Helper::getCurrencyConversion($this->transaction->getCurrency(), 'EUR', $amount);
+            return $conversion;
+
+        } else {
+            return $amount;
+        }
+    }
 
     private function freeWeekLimit()
     {
