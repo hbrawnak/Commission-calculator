@@ -1,18 +1,9 @@
 <?php
 
-
 namespace Paysera\CommissionTask;
-
-
-use Paysera\CommissionTask\Service\Charge\ChargeableInterface;
 
 class Transaction implements TransactionInterface
 {
-    const TYPE_PRIVATE  = 'private';
-    const TYPE_BUSINESS = 'business';
-
-    const OP_DEPOSIT  = 'deposit';
-    const OP_WITHDRAW = 'withdraw';
 
     private $date;
     private $id;
@@ -21,6 +12,10 @@ class Transaction implements TransactionInterface
     private $amount;
     private $currency;
 
+    /**
+     * Transaction constructor.
+     * @param $data
+     */
     public function __construct($data)
     {
         $this->date          = $data[0];

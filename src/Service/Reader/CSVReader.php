@@ -10,11 +10,19 @@ class CSVReader
 {
     public $source;
 
+    /**
+     * CSVReader constructor.
+     * @param $source
+     */
     public function __construct($source)
     {
         $this->source = $source;
     }
 
+    /**
+     * @return mixed
+     * @throws Exception
+     */
     public function getSource()
     {
         if (!isset($this->source)) {
@@ -24,6 +32,10 @@ class CSVReader
         return $this->source;
     }
 
+    /**
+     * @return array
+     * @throws Exception
+     */
     public function dataArray()
     {
         $result = [];

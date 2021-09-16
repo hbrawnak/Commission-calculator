@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Paysera\CommissionTask\API;
+namespace Paysera\CommissionTask\Service\API;
 
 
 use GuzzleHttp\Client;
