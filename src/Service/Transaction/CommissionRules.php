@@ -33,7 +33,7 @@ class CommissionRules
     /**
      * @return int
      */
-    public function freeWeekLimit(): int
+    public function freeWeekAmountLimit(): int
     {
         return 1000;
     }

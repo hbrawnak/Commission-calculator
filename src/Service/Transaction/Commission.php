@@ -111,10 +111,10 @@ class Commission extends CommissionRules implements CommissionInterface
                 && $user['withdrawCount'] < $this->freeWithdrawLimit()) {
                 /* If last withdraw date is smaller or equal than 7 days and withdraw count less than 3 */
                 $chargeAbleAmount = 0;
-                if ($user['amount'] > $this->freeWeekLimit()) {
+                if ($user['amount'] > $this->freeWeekAmountLimit()) {
                     $chargeAbleAmount = $this->transaction->getAmount();
                 } else {
-                    $chargeAbleAmount = $this->freeWeekLimit() - $user['amount'];
+                    $chargeAbleAmount = $this->freeWeekAmountLimit() - $user['amount'];
                 }
 
                 $data = [
@@ -127,8 +127,8 @@ class Commission extends CommissionRules implements CommissionInterface
             }
         } else {
             /* First 1000 EURO free of charge */
-            if ($this->transaction->getAmount() > $this->freeWeekLimit()) {
-                $chargeAbleAmount = $this->transaction->getAmount() - $this->freeWeekLimit();
+            if ($this->transaction->getAmount() > $this->freeWeekAmountLimit()) {
+                $chargeAbleAmount = $this->transaction->getAmount() - $this->freeWeekAmountLimit();
 
                 $data = [
                     'date' => $this->transaction->getDate(),
@@ -140,6 +140,13 @@ class Commission extends CommissionRules implements CommissionInterface
                 return Helper::getPercentage($this->privateWithdrawCharge(), $chargeAbleAmount);
             }
         }
+
+        $data = [
+            'date' => $this->transaction->getDate(),
+            'withdrawCount' => 1,
+            'amount' => $this->transaction->getAmount()
+        ];
+        Cache::set($this->transaction->getId(), $data);
 
         return Helper::getPercentage($this->privateWithdrawCharge(), $this->transaction->getAmount());
     }
