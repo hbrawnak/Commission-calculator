@@ -56,4 +56,12 @@ class CommissionRules
         return 3;
     }
 
+    /**
+     * @return int
+     */
+    public function freeOfCharge()
+    {
+        return 0;
+    }
+
 }
