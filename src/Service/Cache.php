@@ -65,7 +65,7 @@ class Cache
     /**
      * @param $key
      */
-    public function delete($key)
+    public static function delete($key)
     {
         unset($_SESSION['user'][$key]);
     }
