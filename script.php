@@ -1,7 +1,7 @@
 <?php
 
-use Paysera\CommissionTask\Calculator;
-use Paysera\CommissionTask\Service\Cache;
+use App\CommissionTask\Calculator;
+use App\CommissionTask\Service\Cache\Cache;
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 

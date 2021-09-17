@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Paysera\CommissionTask;
+namespace App\CommissionTask;
 
 
-use Paysera\CommissionTask\Service\API\CurrencyExchangeClient;
+use App\CommissionTask\Service\API\CurrencyExchangeClient;
 use Psr\Http\Message\StreamInterface;
 
 class Helper

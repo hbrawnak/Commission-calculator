@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Paysera\CommissionTask;
+namespace App\CommissionTask;
 
 
 use Exception;
-use Paysera\CommissionTask\Service\Commission\Commission;
-use Paysera\CommissionTask\Service\Reader\CSVReader;
-use Paysera\CommissionTask\Service\Transaction\Transaction;
+use App\CommissionTask\Service\Commission\Commission;
+use App\CommissionTask\Service\Reader\CSVReader;
+use App\CommissionTask\Service\Transaction\Transaction;
 
 class Calculator
 {

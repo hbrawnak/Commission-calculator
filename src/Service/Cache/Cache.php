@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Paysera\CommissionTask\Service;
+namespace App\CommissionTask\Service\Cache;
 
 
 class Cache

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Paysera\CommissionTask\Service\Reader;
+namespace App\CommissionTask\Service\Reader;
 
 
 use Exception;

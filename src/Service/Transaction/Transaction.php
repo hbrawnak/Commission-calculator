@@ -1,6 +1,6 @@
 <?php
 
-namespace Paysera\CommissionTask\Service\Transaction;
+namespace App\CommissionTask\Service\Transaction;
 
 class Transaction implements TransactionInterface
 {

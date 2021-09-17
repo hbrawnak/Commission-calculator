@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Paysera\CommissionTask\Service\Commission;
+namespace App\CommissionTask\Service\Commission;
 
 
 class CommissionRules

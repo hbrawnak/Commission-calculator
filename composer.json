@@ -1,16 +1,16 @@
 {
-    "name": "paysera/commission-task-skeleton",
-    "description": "Skeleton for Paysera recruitment task",
+    "name": "app/commission-task-skeleton",
+    "description": "Skeleton for commission task",
     "keywords": [],
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Paysera\\CommissionTask\\": "src"
+            "App\\CommissionTask\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Paysera\\CommissionTask\\Tests\\": "tests"
+            "App\\CommissionTask\\Tests\\": "tests"
         }
     },
     "require": {

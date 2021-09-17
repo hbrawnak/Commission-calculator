@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Paysera\CommissionTask\Exception;
+namespace App\CommissionTask\Exception;
 
 use Exception;
 

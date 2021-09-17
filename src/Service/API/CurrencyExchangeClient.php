@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Paysera\CommissionTask\Service\API;
+namespace App\CommissionTask\Service\API;
 
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Paysera\CommissionTask\Exception\UtilityException;
+use App\CommissionTask\Exception\UtilityException;
 
 class CurrencyExchangeClient
 {
