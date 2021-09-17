@@ -149,7 +149,7 @@ class Commission extends CommissionRules implements CommissionInterface
                     $data = [
                         'date' => $this->transaction->getDate(),
                         'withdrawCount' => $user['withdrawCount'] + 1,
-                        'amount' => $user['amount']
+                        'amount' => $this->freeWeekAmountLimit()
                     ];
                 } else {
                     $chargeAbleEuroAmount = $this->freeWeekAmountLimit() - $user['amount'];
@@ -176,7 +176,7 @@ class Commission extends CommissionRules implements CommissionInterface
                     $data = [
                         'date' => $this->transaction->getDate(),
                         'withdrawCount' => $user['withdrawCount'] + 1,
-                        'amount' => $user['amount']
+                        'amount' => $this->freeWeekAmountLimit()
                     ];
 
                 } else {
@@ -289,7 +289,7 @@ class Commission extends CommissionRules implements CommissionInterface
                     $data = [
                         'date' => $this->transaction->getDate(),
                         'withdrawCount' => $user['withdrawCount'] + 1,
-                        'amount' => $user['amount']
+                        'amount' => $this->freeWeekAmountLimit()
                     ];
                 } else {
                     $chargeAbleAmount = $this->freeWeekAmountLimit() - $user['amount'];
@@ -314,7 +314,7 @@ class Commission extends CommissionRules implements CommissionInterface
                     $data = [
                         'date' => $this->transaction->getDate(),
                         'withdrawCount' => $user['withdrawCount'] + 1,
-                        'amount' => $user['amount']
+                        'amount' => $this->freeWeekAmountLimit()
                     ];
 
                 } else {
