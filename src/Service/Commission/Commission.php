@@ -96,6 +96,9 @@ class Commission extends CommissionRules implements CommissionInterface
         }
     }
 
+    /**
+     * @return false|float
+     */
     private function nonEuroConversionCommission()
     {
         /* 1 EURO to current currency rate */
@@ -142,7 +145,6 @@ class Commission extends CommissionRules implements CommissionInterface
                 && $user['withdrawCount'] <= $this->freeWithdrawLimit()) {
                 /* If last withdraw date is less than or equal 7 days and withdraw count less than or equal 3 */
 
-                $chargeAbleAmount = 0;
                 if ($user['amount'] >= $this->freeWeekAmountLimit()) {
                     $chargeAbleAmount = $totalCurrentCurrency;
 
@@ -169,7 +171,6 @@ class Commission extends CommissionRules implements CommissionInterface
             } elseif (Helper::getDayDiff($this->transaction->getDate(), $lastDate) < $this->weekDay() && $user['withdrawCount'] <= $this->freeWithdrawLimit()) {
                 /* If last withdraw date is within 7 days and withdraw count less than or equal 3 */
 
-                $chargeAbleAmount = 0;
                 if ($user['amount'] >= $this->freeWeekAmountLimit()) {
                     $chargeAbleAmount = $totalCurrentCurrency;
 
@@ -181,8 +182,8 @@ class Commission extends CommissionRules implements CommissionInterface
 
                 } else {
                     $nonChargeAbleEuroAmount = $this->freeWeekAmountLimit() - $user['amount'];
-                    $chargeAbleEuroAmount = $totalEuroRate - $nonChargeAbleEuroAmount;
-                    $chargeAbleAmount     = $chargeAbleEuroAmount * $currentRate;
+                    $chargeAbleEuroAmount    = $totalEuroRate - $nonChargeAbleEuroAmount;
+                    $chargeAbleAmount        = $chargeAbleEuroAmount * $currentRate;
 
                     $data = [
                         'date' => $this->transaction->getDate(),
@@ -221,31 +222,12 @@ class Commission extends CommissionRules implements CommissionInterface
                 return Helper::getPercentage($this->freeOfCharge(), $totalCurrentCurrency);
             }
         }
-
-        /*if ($totalEuroRate <= $this->freeWithdrawLimit()) {
-            $data = [
-                'date' => $this->transaction->getDate(),
-                'withdrawCount' => 1,
-                'amount' => $totalEuroRate
-            ];
-            Cache::set($this->transaction->getId(), $data);
-
-            return Helper::getPercentage($this->privateWithdrawCharge(), $totalCurrentCurrency);
-
-        } else {
-            $chargeAbleAmount = $this->freeWithdrawLimit() - $totalEuroRate;
-            $data             = [
-                'date' => $this->transaction->getDate(),
-                'withdrawCount' => 1,
-                'amount' => $this->freeWithdrawLimit()
-            ];
-            Cache::set($this->transaction->getId(), $data);
-
-            return Helper::getPercentage($this->freeOfCharge(), $chargeAbleAmount * $currentRate);
-        }*/
-
     }
 
+
+    /**
+     * @return false|float
+     */
     private function euroConversionCommission()
     {
         $user = Cache::get($this->transaction->getId());
@@ -283,7 +265,7 @@ class Commission extends CommissionRules implements CommissionInterface
             } elseif (Helper::getDayDiff($this->transaction->getDate(), $lastDate) >= $this->weekDay()
                 && $user['withdrawCount'] <= $this->freeWithdrawLimit()) {
                 /* If last withdraw date is less than or equal 7 days and withdraw count less than or equal 3 */
-                $chargeAbleAmount = 0;
+
                 if ($user['amount'] >= $this->freeWeekAmountLimit()) {
                     $chargeAbleAmount = $this->transaction->getAmount();
 
@@ -308,7 +290,6 @@ class Commission extends CommissionRules implements CommissionInterface
             } elseif (Helper::getDayDiff($this->transaction->getDate(), $lastDate) < $this->weekDay() && $user['withdrawCount'] <= $this->freeWithdrawLimit()) {
                 /* If last withdraw date is within 7 days and withdraw count less than or equal 3 */
 
-                $chargeAbleAmount = 0;
                 if ($user['amount'] >= $this->freeWeekAmountLimit()) {
                     $chargeAbleAmount = $this->transaction->getAmount();
 
@@ -320,7 +301,7 @@ class Commission extends CommissionRules implements CommissionInterface
 
                 } else {
                     $nonChargeAbleAmount = $this->freeWeekAmountLimit() - $user['amount'];
-                    $chargeAbleAmount = $this->transaction->getAmount() - $nonChargeAbleAmount;
+                    $chargeAbleAmount    = $this->transaction->getAmount() - $nonChargeAbleAmount;
 
                     $data = [
                         'date' => $this->transaction->getDate(),
@@ -358,38 +339,6 @@ class Commission extends CommissionRules implements CommissionInterface
                 return Helper::getPercentage($this->freeOfCharge(), $this->transaction->getAmount());
             }
         }
-
-
-        /*if ($this->transaction->getAmount() <= $this->freeWithdrawLimit()) {
-            $data = [
-                'date' => $this->transaction->getDate(),
-                'withdrawCount' => 1,
-                'amount' => $this->transaction->getAmount()
-            ];
-            Cache::set($this->transaction->getId(), $data);
-
-            return Helper::getPercentage($this->privateWithdrawCharge(), $this->transaction->getAmount());
-
-        } else {
-            $chargeAbleAmount = $this->freeWithdrawLimit() - $this->transaction->getAmount();
-            $data             = [
-                'date' => $this->transaction->getDate(),
-                'withdrawCount' => 1,
-                'amount' => $this->freeWithdrawLimit()
-            ];
-            Cache::set($this->transaction->getId(), $data);
-
-            return Helper::getPercentage($this->freeOfCharge(), $chargeAbleAmount);
-        }*/
-
-        /*$data = [
-            'date' => $this->transaction->getDate(),
-            'withdrawCount' => 1,
-            'amount' => $this->transaction->getAmount()
-        ];
-        Cache::set($this->transaction->getId(), $data);
-
-        return Helper::getPercentage($this->privateWithdrawCharge(), $this->transaction->getAmount());*/
     }
 
 
