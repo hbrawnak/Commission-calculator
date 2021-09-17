@@ -180,13 +180,14 @@ class Commission extends CommissionRules implements CommissionInterface
                     ];
 
                 } else {
-                    $chargeAbleEuroAmount = $this->freeWeekAmountLimit() - $user['amount'];
+                    $nonChargeAbleEuroAmount = $this->freeWeekAmountLimit() - $user['amount'];
+                    $chargeAbleEuroAmount = $totalEuroRate - $nonChargeAbleEuroAmount;
                     $chargeAbleAmount     = $chargeAbleEuroAmount * $currentRate;
 
                     $data = [
                         'date' => $this->transaction->getDate(),
                         'withdrawCount' => $user['withdrawCount'] + 1,
-                        'amount' => $user['amount'] + $chargeAbleEuroAmount
+                        'amount' => $user['amount'] + $nonChargeAbleEuroAmount
                     ];
                 }
 
@@ -318,12 +319,13 @@ class Commission extends CommissionRules implements CommissionInterface
                     ];
 
                 } else {
-                    $chargeAbleAmount = $this->freeWeekAmountLimit() - $user['amount'];
+                    $nonChargeAbleAmount = $this->freeWeekAmountLimit() - $user['amount'];
+                    $chargeAbleAmount = $this->transaction->getAmount() - $nonChargeAbleAmount;
 
                     $data = [
                         'date' => $this->transaction->getDate(),
                         'withdrawCount' => $user['withdrawCount'] + 1,
-                        'amount' => $user['amount'] + $chargeAbleAmount
+                        'amount' => $user['amount'] + $nonChargeAbleAmount
                     ];
                 }
 
