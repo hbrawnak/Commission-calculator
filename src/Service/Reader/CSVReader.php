@@ -33,7 +33,7 @@ class CSVReader
     }
 
     /**
-     * @return array
+     * @return array | Exception
      * @throws Exception
      */
     public function dataArray()
@@ -44,7 +44,7 @@ class CSVReader
             if ($file = fopen($this->getSource(), "r")) {
                 while (!feof($file)) {
                     $line     = fgets($file);
-                    $row      = explode(',', $line);
+                    $row      = explode(',', trim($line));
                     $result[] = $row;
                 }
                 fclose($file);

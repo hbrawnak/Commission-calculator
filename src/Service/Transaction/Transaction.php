@@ -1,6 +1,6 @@
 <?php
 
-namespace Paysera\CommissionTask;
+namespace Paysera\CommissionTask\Service\Transaction;
 
 class Transaction implements TransactionInterface
 {
@@ -27,23 +27,23 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getDate()
+    public function getDate(): string
     {
-        return $this->date;
+        return (string)$this->date;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
-        return $this->id;
+        return (int)$this->id;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getType()
     {
@@ -51,7 +51,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getOperationType()
     {
@@ -59,18 +59,18 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getAmount()
     {
-        return $this->amount;
+        return (float)$this->amount;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCurrency()
     {
-        return $this->currency;
+        return strtoupper($this->currency);
     }
 }

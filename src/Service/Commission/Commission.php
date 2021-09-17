@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Paysera\CommissionTask\Service\Transaction;
+namespace Paysera\CommissionTask\Service\Commission;
 
 
 use Paysera\CommissionTask\Helper;
 use Paysera\CommissionTask\Service\Cache;
-use Paysera\CommissionTask\TransactionInterface;
+use Paysera\CommissionTask\Service\Transaction\TransactionInterface;
 use Psr\Http\Message\StreamInterface;
 
 class Commission extends CommissionRules implements CommissionInterface

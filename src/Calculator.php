@@ -5,8 +5,9 @@ namespace Paysera\CommissionTask;
 
 
 use Exception;
-use Paysera\CommissionTask\Service\Transaction\Commission;
+use Paysera\CommissionTask\Service\Commission\Commission;
 use Paysera\CommissionTask\Service\Reader\CSVReader;
+use Paysera\CommissionTask\Service\Transaction\Transaction;
 
 class Calculator
 {

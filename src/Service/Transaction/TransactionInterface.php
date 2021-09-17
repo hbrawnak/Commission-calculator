@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Paysera\CommissionTask;
+namespace Paysera\CommissionTask\Service\Transaction;
 
 
 interface TransactionInterface
