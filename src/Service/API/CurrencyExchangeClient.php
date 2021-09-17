@@ -5,17 +5,21 @@ namespace Paysera\CommissionTask\Service\API;
 
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Paysera\CommissionTask\Exception\UtilityException;
 
 class CurrencyExchangeClient
 {
 
-    const ACCESS_KEY = '171af37d0bd4bf65f457adb8b0d3a759';
+    const ACCESS_KEY = 'c2b26729318d0bf4916e48bcc2649064';
+
     private $client;
     private $access_key;
     private $fromCurrency;
     private $toCurrency;
     private $amount;
+
+    private $base;
 
     /**
      * CurrencyExchangeClient constructor.
@@ -27,18 +31,23 @@ class CurrencyExchangeClient
         $this->fromCurrency = $fromCurrency;
         $this->toCurrency   = $toCurrency;
         $this->amount       = $amount;
+
+        $this->base = "http://api.exchangeratesapi.io/v1/";
     }
 
+    /**
+     * @return mixed
+     * @throws UtilityException
+     * @throws GuzzleException
+     */
     public function get()
     {
         try {
-            $url      = "http://api.exchangeratesapi.io/v1/convert?access_key={$this->access_key}&from={$this->fromCurrency}&to={$this->toCurrency}&amount={$this->amount}";
+            $url      = $this->base . "convert?access_key={$this->access_key}&from={$this->fromCurrency}&to={$this->toCurrency}&amount={$this->amount}";
             $response = $this->client->request('GET', $url);
-            return $response->getBody();
+            return json_decode($response->getBody(), true);
         } catch (\Exception $exception) {
-            print_r($exception->getMessage());
-            //throw new UtilityException($exception->getMessage());
+            throw new UtilityException($exception->getMessage());
         }
-
     }
 }
