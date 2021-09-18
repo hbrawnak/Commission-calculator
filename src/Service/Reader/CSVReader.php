@@ -4,6 +4,7 @@
 namespace App\CommissionTask\Service\Reader;
 
 
+use App\CommissionTask\Exception\UtilityException;
 use Exception;
 
 class CSVReader
@@ -54,7 +55,7 @@ class CSVReader
                 echo "File does not exist \n";
             }
         } catch (Exception $exception) {
-            throw new Exception($exception->getMessage());
+            throw new UtilityException($exception->getMessage());
         }
     }
 }
