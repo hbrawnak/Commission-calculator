@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace App\CommissionTask\Tests;
+namespace App\CommissionTask\Tests\Service;
 
 
 use App\CommissionTask\Calculator;
@@ -18,7 +18,7 @@ class CalculatorTest extends TestCase
         $this->calculator = new Calculator();
     }
 
-    public function testInit()
+    public function Init()
     {
         $this->assertEquals(
             [0.60, 3.00],
