@@ -3,6 +3,7 @@
 Withdraw and deposit commission calculation with currency conversion
 
 #### Run the script
+`composer install`
 
 ````
 -> cat input.csv
