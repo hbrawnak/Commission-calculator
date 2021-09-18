@@ -44,7 +44,7 @@ OK (1 test, 1 assertion)
 ````
 
 ````
-Note: 2 different commands because of the caching mechanism I have used in the project. 
+Note: 2 different commands of unittest because of the caching mechanism I have used in the project. 
 When all tests run at a time, the app caches the value from CalculatorTest.php, 
 then In CommissionTest.php expected output doesn't match. So the calculator test and 
 service test should be run individually.
