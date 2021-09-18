@@ -7,6 +7,22 @@ Withdraw and deposit commission calculation with currency conversion
 ````
 -> cat input.csv
 -> php script.php input.csv
+
+Output
+0.6
+3
+0
+0.06
+1.5
+0
+0.7
+0.3
+0.3
+3
+0
+0
+8613.29
+
 ````
 
 
