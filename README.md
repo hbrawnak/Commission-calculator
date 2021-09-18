@@ -67,4 +67,4 @@ then In CommissionTest.php expected output doesn't match. So the calculator test
 service test should be run individually.
 ````
 
-In these 6 days, I have tried to make the best output. I think it's not the best still. There is more room to improve. Commission.php class should be optimized and all other classes can be optimized. And more unittest for other cases. 
+In these 6 days, I have tried to make the best output. I think it's not the best still. There are more rooms to improve. Commission.php class should be optimized and all other classes can be optimized. And more unittest for other cases. 
