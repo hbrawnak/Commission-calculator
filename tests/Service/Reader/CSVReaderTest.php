@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Paysera\CommissionTask\Tests\Service\Reader;
+namespace App\CommissionTask\Tests\Service\Reader;
 
 
-use Paysera\CommissionTask\Service\Reader\CSVReader;
+use App\CommissionTask\Service\Reader\CSVReader;
 use PHPUnit\Framework\TestCase;
 
 class CSVReaderTest extends TestCase

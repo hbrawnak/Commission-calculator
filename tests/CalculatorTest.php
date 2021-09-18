@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 
-namespace Paysera\CommissionTask\Tests;
+namespace App\CommissionTask\Tests;
 
 
-use Paysera\CommissionTask\Calculator;
+use App\CommissionTask\Calculator;
 use PHPUnit\Framework\TestCase;
 
 class CalculatorTest extends TestCase

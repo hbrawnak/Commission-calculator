@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Paysera\CommissionTask\Tests\Service\Commission;
+namespace App\CommissionTask\Tests\Service\Commission;
 
-use Paysera\CommissionTask\Service\Commission\Commission;
-use Paysera\CommissionTask\Service\Transaction\Transaction;
+use App\CommissionTask\Service\Commission\Commission;
+use App\CommissionTask\Service\Transaction\Transaction;
 use PHPUnit\Framework\TestCase;
 
 class CommissionTest extends TestCase
